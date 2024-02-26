@@ -7,7 +7,7 @@ class DynamicLanguage {
   static String urlValue = '';
   static bool isLoading = false;
   static RxString selectedLanguage ='en'.obs;
-  static TextDirection languageDirection =TextDirection.ltr;
+  static Rx<TextDirection> languageDirection =TextDirection.ltr.obs;
   static List<Language> languages=[];
   static init({required String url}) {
     urlValue = url;
@@ -27,7 +27,7 @@ class DynamicLanguage {
     selectedLanguage.value = langKey;
   }
   static updateLanguageDir(TextDirection dir){
-    languageDirection = dir;
+    languageDirection.value = dir;
   }
 
   static changeLanguage(String langKey){
