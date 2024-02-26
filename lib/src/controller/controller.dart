@@ -108,10 +108,11 @@ class LanguageController extends GetxController {
       );
       _isLoading.value = false;
       DynamicLanguage.updateStatus(_isLoading.value);
-      DynamicLanguage.updateLanguageDirection(
-          selectedLang.dir == 'rtl' ? TextDirection.rtl : TextDirection.ltr);
-      update();
 
+      debugPrint('- - - - - - - - - - - - - - - - -  - - -');
+      debugPrint(selectedLang.dir.toString());
+      DynamicLanguage.updateLanguageDirection(selectedLang.dir == 'rtl' ? TextDirection.rtl : TextDirection.ltr);
+      update();
       return selectedLang.dir == 'rtl' ? TextDirection.rtl : TextDirection.ltr;
     } catch (e) {
       return TextDirection.ltr; // Fallback to left-to-right (LTR)
