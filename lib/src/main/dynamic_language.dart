@@ -1,7 +1,5 @@
 import 'dart:ui';
-
 import 'package:get/get.dart';
-
 import '../controller/controller.dart';
 import '../model/model.dart';
 
@@ -27,6 +25,7 @@ class DynamicLanguage {
 }
   static updateLanguageKey(String langKey){
     selectedLanguage = langKey;
+    Get.find<LanguageController>().changeLanguage(langKey);
   }
   static updateLanguageDir(TextDirection dir){
     languageDirection = dir;
