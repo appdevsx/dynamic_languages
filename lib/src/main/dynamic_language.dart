@@ -9,7 +9,7 @@ class DynamicLanguage {
   static bool get isLoading => _isLoading.value;
 
   static RxString selectedLanguage = 'en'.obs;
-  static Rx<TextDirection> languageDirection = Get.find<LanguageController>().languageDirection as Rx<TextDirection>;
+  static TextDirection languageDirection = Get.find<LanguageController>().languageDirection;
   static List<Language> languages = [];
   static init({required String url}) {
     urlValue = url;
@@ -35,13 +35,13 @@ class DynamicLanguage {
 
   /// Update Language Direction
   static updateLanguageDirection(TextDirection textDirection) {
-    languageDirection.value = textDirection;
+    languageDirection = textDirection;
   }
 
   /// Change language method
   static changeLanguage(String langKey) {
     selectedLanguage.value = langKey;
     Get.find<LanguageController>().changeLanguage(langKey);
-    languageDirection.value = Get.find<LanguageController>().languageDirection;
+    languageDirection = Get.find<LanguageController>().languageDirection;
   }
 }
