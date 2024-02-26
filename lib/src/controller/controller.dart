@@ -108,7 +108,7 @@ class LanguageController extends GetxController {
       );
       _isLoading.value = false;
       DynamicLanguage.updateStatus( _isLoading.value);
-      DynamicLanguage.updateLanguageDir(selectedLang.dir == 'rtl' ? TextDirection.rtl : TextDirection.ltr);
+
       // LocalStorage.saveRtl(type: selectedLang.dir == 'rtl' ? true : false);
       update();
 
