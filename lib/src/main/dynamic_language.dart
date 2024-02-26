@@ -31,8 +31,7 @@ class DynamicLanguage {
   }
 
   static changeLanguage(String langKey){
-
-    selectedLanguage = langKey;
+    selectedLanguage = Get.find<LanguageController>().selectedLanguage.value;
     Get.find<LanguageController>().changeLanguage(langKey);
   }
 }
