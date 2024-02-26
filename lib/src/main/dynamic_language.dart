@@ -5,6 +5,7 @@ import '../controller/controller.dart';
 class DynamicLanguage {
   static String urlValue = '';
   static bool isLoading = false;
+  static String selectedLanguage ='en';
   static init({required String url}) {
     urlValue = url;
     if (urlValue != '') {
@@ -21,4 +22,10 @@ class DynamicLanguage {
   static updateStatus(bool status){
     isLoading = status;
 }
+
+  static updateLanguageKey(String langKey){
+    selectedLanguage = langKey;
+  }
+
+
 }

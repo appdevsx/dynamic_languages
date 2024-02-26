@@ -49,10 +49,13 @@ class LanguageController extends GetxController {
     defLangKey.value = selectedLang.code;
     debugPrint('Default key ${defLangKey.value} ${selectedLang.code}');
 
+
+
     // Load selected language from cache
     final box = GetStorage();
     selectedLanguage.value = box.read(selectedLanguageKey) ?? defLangKey.value;
     debugPrint(box.read("SELECTED KEY $selectedLanguageKey"));
+    DynamicLanguage.updateLanguageKey(selectedLanguage.value);
     _isLoading.value = false;
     DynamicLanguage.updateStatus( _isLoading.value);
     return selectedLang.code;
@@ -62,7 +65,7 @@ class LanguageController extends GetxController {
     selectedLanguage.value = newLanguage;
     final box = GetStorage();
     box.write(selectedLanguageKey, newLanguage);
-    //LocalStorage.saveRtl(type: languageDirection == 'rtl' ? true : false);
+    DynamicLanguage.updateLanguageKey(newLanguage);
     update();
   }
 
