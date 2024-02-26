@@ -27,8 +27,8 @@ class LanguageController extends GetxController {
     DynamicLanguage.updateStatus( _isLoading.value);
     try {
       final languageService = LanguageService();
-      languages =
-          await languageService.fetchLanguages(DynamicLanguage.urlValue);
+      languages = await languageService.fetchLanguages(DynamicLanguage.urlValue);
+      DynamicLanguage.languages = await languageService.fetchLanguages(DynamicLanguage.urlValue);
       _isLoading.value = false;
       DynamicLanguage.updateStatus( _isLoading.value);
     } catch (e) {
@@ -108,11 +108,15 @@ class LanguageController extends GetxController {
       );
       _isLoading.value = false;
       DynamicLanguage.updateStatus( _isLoading.value);
+
       // LocalStorage.saveRtl(type: selectedLang.dir == 'rtl' ? true : false);
       update();
+      DynamicLanguage.updateLanguageDir(selectedLang.dir == 'rtl' ? TextDirection.rtl : TextDirection.ltr);
       return selectedLang.dir == 'rtl' ? TextDirection.rtl : TextDirection.ltr;
     } catch (e) {
       return TextDirection.ltr; // Fallback to left-to-right (LTR)
     }
   }
+
+
 }
