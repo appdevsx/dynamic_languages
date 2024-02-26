@@ -4,6 +4,7 @@ import '../controller/controller.dart';
 
 class DynamicLanguage {
   static String urlValue = '';
+  static bool isLoading = false;
   static init({required String url}) {
     urlValue = url;
     if (urlValue != '') {
@@ -16,4 +17,8 @@ class DynamicLanguage {
   }
 
   static update(String key) {}
+
+  static updateStatus(bool status){
+    isLoading = status;
+}
 }
