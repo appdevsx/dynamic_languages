@@ -25,10 +25,14 @@ class DynamicLanguage {
 }
   static updateLanguageKey(String langKey){
     selectedLanguage = langKey;
-    Get.find<LanguageController>().changeLanguage(langKey);
   }
   static updateLanguageDir(TextDirection dir){
     languageDirection = dir;
   }
 
+  static changeLanguage(String langKey){
+
+    selectedLanguage = langKey;
+    Get.find<LanguageController>().changeLanguage(langKey);
+  }
 }
