@@ -6,7 +6,7 @@ import '../model/model.dart';
 class DynamicLanguage {
   static String urlValue = '';
   static bool isLoading = false;
-  static String selectedLanguage ='en';
+  static RxString selectedLanguage ='en'.obs;
   static TextDirection languageDirection =TextDirection.ltr;
   static List<Language> languages=[];
   static init({required String url}) {
@@ -24,14 +24,14 @@ class DynamicLanguage {
     isLoading = status;
 }
   static updateLanguageKey(String langKey){
-    selectedLanguage = langKey;
+    selectedLanguage.value = langKey;
   }
   static updateLanguageDir(TextDirection dir){
     languageDirection = dir;
   }
 
   static changeLanguage(String langKey){
-    selectedLanguage = Get.find<LanguageController>().selectedLanguage.value;
+    selectedLanguage.value = langKey;
     Get.find<LanguageController>().changeLanguage(langKey);
   }
 }
