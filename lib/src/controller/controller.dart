@@ -109,7 +109,7 @@ class LanguageController extends GetxController {
       _isLoading.value = false;
       DynamicLanguage.updateStatus(_isLoading.value);
 
-      debugPrint('- - - - - - - - - - - - - - - - -  - - -');
+      debugPrint('- - - - - - - - - - - - - -');
       debugPrint(selectedLang.dir.toString());
       DynamicLanguage.updateLanguageDirection(selectedLang.dir == 'rtl' ? TextDirection.rtl : TextDirection.ltr);
       update();
