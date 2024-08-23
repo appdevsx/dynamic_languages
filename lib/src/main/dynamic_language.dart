@@ -1,5 +1,7 @@
 import 'dart:ui';
+
 import 'package:get/get.dart';
+
 import '../controller/controller.dart';
 import '../model/model.dart';
 
@@ -9,7 +11,9 @@ class DynamicLanguage {
   static bool get isLoading => _isLoading.value;
 
   static RxString selectedLanguage = 'en'.obs;
-  static TextDirection languageDirection = Get.find<LanguageController>().languageDirection;
+  static TextDirection languageDirection =
+      Get.find<LanguageController>().languageDirection;
+  RxBool isLoadingValue = Get.find<LanguageController>().isLoadingValue;
   static List<Language> languages = [];
   static init({required String url}) {
     urlValue = url;

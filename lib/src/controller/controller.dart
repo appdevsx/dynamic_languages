@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+
 import '../main/dynamic_language.dart';
 import '../model/model.dart';
 import '../service/service.dart';
@@ -17,22 +18,22 @@ class LanguageController extends GetxController {
 
   late List<Language> languages;
 
-  final _isLoading = false.obs;
+  final isLoadingValue = false.obs;
 
-  bool get isLoading => _isLoading.value;
+  bool get isLoading => isLoadingValue.value;
   static const String selectedLanguageKey = 'selectedLanguage';
 
   Future<void> fetchLanguages() async {
-    _isLoading.value = true;
-    DynamicLanguage.updateStatus(_isLoading.value);
+    isLoadingValue.value = true;
+    DynamicLanguage.updateStatus(isLoadingValue.value);
     try {
       final languageService = LanguageService();
       languages =
           await languageService.fetchLanguages(DynamicLanguage.urlValue);
       DynamicLanguage.languages =
           await languageService.fetchLanguages(DynamicLanguage.urlValue);
-      _isLoading.value = false;
-      DynamicLanguage.updateStatus(_isLoading.value);
+      isLoadingValue.value = false;
+      DynamicLanguage.updateStatus(isLoadingValue.value);
     } catch (e) {
       debugPrint('Error fetching language data: $e');
     }
@@ -40,8 +41,8 @@ class LanguageController extends GetxController {
 
   // >> get default language key
   String getDefaultKey() {
-    _isLoading.value = true;
-    DynamicLanguage.updateStatus(_isLoading.value);
+    isLoadingValue.value = true;
+    DynamicLanguage.updateStatus(isLoadingValue.value);
     final selectedLang = languages.firstWhere(
       (lang) => lang.status == true,
       orElse: () => languages.firstWhere(
@@ -56,8 +57,8 @@ class LanguageController extends GetxController {
     selectedLanguage.value = box.read(selectedLanguageKey) ?? defLangKey.value;
     debugPrint(box.read("SELECTED KEY $selectedLanguageKey"));
     DynamicLanguage.updateLanguageKey(selectedLanguage.value);
-    _isLoading.value = false;
-    DynamicLanguage.updateStatus(_isLoading.value);
+    isLoadingValue.value = false;
+    DynamicLanguage.updateStatus(isLoadingValue.value);
     return selectedLang.code;
   }
 
@@ -97,8 +98,8 @@ class LanguageController extends GetxController {
 
   /// Get text direction [ when selected language null return default direction ]
   TextDirection get languageDirection {
-    _isLoading.value = true;
-    DynamicLanguage.updateStatus(_isLoading.value);
+    isLoadingValue.value = true;
+    DynamicLanguage.updateStatus(isLoadingValue.value);
     try {
       final selectedLang = languages.firstWhere(
         (lang) => lang.code == selectedLanguage.value,
@@ -106,12 +107,13 @@ class LanguageController extends GetxController {
           (lang) => lang.code == defLangKey.value,
         ),
       );
-      _isLoading.value = false;
-      DynamicLanguage.updateStatus(_isLoading.value);
+      isLoadingValue.value = false;
+      DynamicLanguage.updateStatus(isLoadingValue.value);
 
       debugPrint('- - - - - - - - - - - - - -');
       debugPrint(selectedLang.dir.toString());
-      DynamicLanguage.updateLanguageDirection(selectedLang.dir == 'rtl' ? TextDirection.rtl : TextDirection.ltr);
+      DynamicLanguage.updateLanguageDirection(
+          selectedLang.dir == 'rtl' ? TextDirection.rtl : TextDirection.ltr);
       update();
       return selectedLang.dir == 'rtl' ? TextDirection.rtl : TextDirection.ltr;
     } catch (e) {
